@@ -84,8 +84,6 @@ LD_SCRIPT = linker//s6e2cca_rom.ld
 INC_DIRS = ../armgcc\
       ../../../cmsis/include\
       ../../common/emac\
-      ../../common/printf_scanf\
-      ../../../drivers/\
       ../../common\
       
       
@@ -93,7 +91,6 @@ INC_DIRS = ../armgcc\
 SRC_DIRS = ../\
       ../armgcc\
       ../../common/emac\
-      ../../common/printf_scanf\
       ../../common\
       
 
@@ -125,7 +122,7 @@ VPATH := $(SRC_DIRS)
 TARGET    = $(PROJECT)
 LIB_DIRS  = $(patsubst %,-L%,$(MCU_LIB_PATH))
  
-LIBS    = -lg -lstdc++ -lsupc++ -lm -lgcc -lc -lnosys
+LIBS    = -lg   -lm -lgcc -lc -lnosys
 
 INC_DIRS_F = -I. $(patsubst %, -I%, $(INC_DIRS))
 
@@ -148,7 +145,7 @@ LD_OPTIONS = $(MCU_CC_FLAGS) -Os -L $(LIB_DIRS) -T $(LD_SCRIPT) $(INC_DIRS_F)
 #use this if %f is used, by default it's commented
 #LD_OPTIONS += -u _printf_float -u _scanf_float
 LD_OPTIONS += -Wl,--start-group
-LD_OPTIONS += -lc -lg -lstdc++ -lsupc++
+LD_OPTIONS += -lc -lg 
 LD_OPTIONS += -lgcc -lm
 LD_OPTIONS += -Wl,--end-group 
 LD_OPTIONS += -Wl,-Map=$(OBJ_FOLDER)$(TARGET).map,--cref,--no-warn-mismatch,--gc-sections
